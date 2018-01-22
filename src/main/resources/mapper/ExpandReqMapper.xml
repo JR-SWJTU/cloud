@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jr.cloud.mapper.ExpandReqMapper">
+  <resultMap id="BaseResultMap" type="com.jr.cloud.entity.ExpandReq">
+    <id column="expand_req_id" jdbcType="INTEGER" property="expandReqId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="original_size" jdbcType="INTEGER" property="originalSize" />
+    <result column="expand_size" jdbcType="INTEGER" property="expandSize" />
+    <result column="has_deleted" jdbcType="BIT" property="hasDeleted" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    expand_req_id, user_id, user_name, original_size, expand_size, has_deleted
+  </sql>
+  <select id="selectByExample" parameterType="com.jr.cloud.entity.ExpandReqExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from expand_req
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from expand_req
+    where expand_req_id = #{expandReqId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from expand_req
+    where expand_req_id = #{expandReqId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jr.cloud.entity.ExpandReqExample">
+    delete from expand_req
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jr.cloud.entity.ExpandReq">
+    insert into expand_req (expand_req_id, user_id, user_name, 
+      original_size, expand_size, has_deleted
+      )
+    values (#{expandReqId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{originalSize,jdbcType=INTEGER}, #{expandSize,jdbcType=INTEGER}, #{hasDeleted,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jr.cloud.entity.ExpandReq">
+    insert into expand_req
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="expandReqId != null">
+        expand_req_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="originalSize != null">
+        original_size,
+      </if>
+      <if test="expandSize != null">
+        expand_size,
+      </if>
+      <if test="hasDeleted != null">
+        has_deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="expandReqId != null">
+        #{expandReqId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="originalSize != null">
+        #{originalSize,jdbcType=INTEGER},
+      </if>
+      <if test="expandSize != null">
+        #{expandSize,jdbcType=INTEGER},
+      </if>
+      <if test="hasDeleted != null">
+        #{hasDeleted,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jr.cloud.entity.ExpandReqExample" resultType="java.lang.Integer">
+    select count(*) from expand_req
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update expand_req
+    <set>
+      <if test="record.expandReqId != null">
+        expand_req_id = #{record.expandReqId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.originalSize != null">
+        original_size = #{record.originalSize,jdbcType=INTEGER},
+      </if>
+      <if test="record.expandSize != null">
+        expand_size = #{record.expandSize,jdbcType=INTEGER},
+      </if>
+      <if test="record.hasDeleted != null">
+        has_deleted = #{record.hasDeleted,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update expand_req
+    set expand_req_id = #{record.expandReqId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      original_size = #{record.originalSize,jdbcType=INTEGER},
+      expand_size = #{record.expandSize,jdbcType=INTEGER},
+      has_deleted = #{record.hasDeleted,jdbcType=BIT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jr.cloud.entity.ExpandReq">
+    update expand_req
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="originalSize != null">
+        original_size = #{originalSize,jdbcType=INTEGER},
+      </if>
+      <if test="expandSize != null">
+        expand_size = #{expandSize,jdbcType=INTEGER},
+      </if>
+      <if test="hasDeleted != null">
+        has_deleted = #{hasDeleted,jdbcType=BIT},
+      </if>
+    </set>
+    where expand_req_id = #{expandReqId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jr.cloud.entity.ExpandReq">
+    update expand_req
+    set user_id = #{userId,jdbcType=INTEGER},
+      user_name = #{userName,jdbcType=VARCHAR},
+      original_size = #{originalSize,jdbcType=INTEGER},
+      expand_size = #{expandSize,jdbcType=INTEGER},
+      has_deleted = #{hasDeleted,jdbcType=BIT}
+    where expand_req_id = #{expandReqId,jdbcType=INTEGER}
+  </update>
+</mapper>

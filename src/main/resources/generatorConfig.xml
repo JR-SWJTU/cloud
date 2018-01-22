@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+		PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+		"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<!--mybatis-generator-maven-plugin生成数据库实体的配置文件-->
+<generatorConfiguration>
+
+	<!--导入属性配置，前面我们写的一个配置文件，你也可以直接使用mybatis的jdbc的配置文件 -->
+	<properties  resource="resource/db.properties"/>
+
+	<!-- 数据库驱动，注意，这里必须要修改成你的数据库的驱动地址-->
+	<context defaultModelType="flat" id="mysqlTables" targetRuntime="MyBatis3">
+
+		<property name="javaFileEncoding" value="UTF-8"/>
+		<!-- 由于beginningDelimiter和endingDelimiter的默认值为双引号(")，在Mysql中不能这么写，所以还要将这两个默认值改为`  -->
+		<property name="beginningDelimiter" value="`"/>
+		<property name="endingDelimiter" value="`"/>
+
+		<!-- 为生成的Java模型创建一个toString方法 -->
+		<plugin type="org.mybatis.generator.plugins.ToStringPlugin"></plugin>
+
+		<!-- 为生成的Java模型类添加序列化接口，并生成serialVersionUID字段 -->
+		<!--<plugin type="com.zheng.common.plugin.SerializablePlugin">-->
+			<!--<property name="suppressJavaInterface" value="false"/>-->
+		<!--</plugin>-->
+
+		<!-- Java模型生成equals和hashcode方法 -->
+		<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"></plugin>
+
+		<commentGenerator>
+			<property name="suppressDate" value="true"/>
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="true"/>
+		</commentGenerator>
+
+
+
+		<!--数据库链接URL，用户名、密码 -->
+		<jdbcConnection driverClass="${jdbc.driver}" connectionURL="${jdbc.url}" userId="${jdbc.username}" password="${jdbc.password}">
+		</jdbcConnection>
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false"/>
+		</javaTypeResolver>
+
+		<!-- 生成模型的包名和位置-->
+		<javaModelGenerator targetPackage="com.jr.cloud.entity" targetProject="src/main/java">
+			<property name="enableSubPackages" value="false"/>
+			<property name="trimStrings" value="true"/>
+		</javaModelGenerator>
+
+		<!-- 生成映射文件的包名和位置-->
+		<sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
+			<property name="enableSubPackages" value="false"/>
+		</sqlMapGenerator>
+
+		<!-- 生成DAO的包名和位置-->
+		<javaClientGenerator type="XMLMAPPER" targetPackage="com.jr.cloud.mapper" targetProject="src/main/java">
+			<property name="enableSubPackages" value="false"/>
+		</javaClientGenerator>
+
+		<!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名，这里举例，只配置了一个table，你可以配置多个-->
+		<!--<table tableName="accidencecollectiondata" />-->
+		<!--<table tableName="weiBo" />-->
+		<table tableName="admin" />
+		<table tableName="download_record" />
+		<table tableName="expand_req" />
+		<table tableName="upload_record" />
+		<table tableName="user" />
+
+
+	</context>
+</generatorConfiguration>
