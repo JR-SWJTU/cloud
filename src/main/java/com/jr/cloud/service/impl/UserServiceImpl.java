@@ -43,7 +43,7 @@ public class UserServiceImpl implements IUserService {
     public void register(User user) {
 
         UserExample userExample = new UserExample();
-        userExample.createCriteria().andNameEqualTo(user.getPhone());
+        userExample.createCriteria().andPhoneEqualTo(user.getPhone());
         List<User> list = new ArrayList<User>();
         list = userMapper.selectByExample(userExample);
 
@@ -170,6 +170,15 @@ public class UserServiceImpl implements IUserService {
         if(user.getUserId() == null)
             throw new ReqParmIncorException();
 
+        //用户更新信息设置
+        User temp = userMapper.selectByPrimaryKey(user.getUserId());
+        if(user.getName() != null)
+            temp.setName(user.getName());
+        if(user.getEmail() != null)
+            temp.setEmail(user.getEmail());
+        if(user.getEmail() != null)
+            temp.setNickName(user.getNickName());
+
         UserExample userExample = new UserExample();
         userExample.createCriteria().andNameEqualTo(user.getName());
         //账号存在
@@ -177,7 +186,7 @@ public class UserServiceImpl implements IUserService {
             throw new CustomException("用户名已经存在");
         }
 
-        userMapper.updateByPrimaryKey(user);
+        userMapper.updateByPrimaryKey(temp);
     }
 
 

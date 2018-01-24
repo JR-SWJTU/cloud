@@ -81,14 +81,16 @@ public class UserController {
     }
 
     /**批量删除用户*/
-    @RequestMapping(value = "", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @Authorization
     public JsonResult deleteDepartment(HttpServletRequest request , @RequestBody Map map) {
         List ids =  (List)map.get("ids");
         userService.deleteUser(ids);
-        String token = request.getHeader("authorization").substring("".length());
-        redisService.delSingleRelationshipByKey( token );
-        redisService.delSingleRelationshipByKey( String.valueOf(ids.get(0)));
+        String token = request.getHeader("authorization");
+        if(token != null){
+            redisService.delSingleRelationshipByKey( token );
+            redisService.delSingleRelationshipByKey( String.valueOf(ids.get(0)));
+        }
         return JsonResult.ok("");
     }
 
@@ -120,7 +122,7 @@ public class UserController {
      * @param user
      * @return
      */
-    @RequestMapping(value = "", method = RequestMethod.PATCH)
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
     public JsonResult updateUser(@RequestBody User user) throws Exception{
         userService.updateUser(user);
         return JsonResult.build(StatusCode.SUCCESS);
