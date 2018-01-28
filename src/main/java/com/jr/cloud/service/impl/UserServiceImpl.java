@@ -10,6 +10,7 @@ import com.jr.cloud.entity.User;
 import com.jr.cloud.entity.UserExample;
 import com.jr.cloud.mapper.UserMapper;
 import com.jr.cloud.mapper.UserMapperCustom;
+import com.jr.cloud.service.IFileService;
 import com.jr.cloud.service.IUserService;
 import com.jr.cloud.util.PageResult;
 import com.jr.cloud.web.exception.base.CustomException;
@@ -34,13 +35,15 @@ public class UserServiceImpl implements IUserService {
     private UserMapperCustom userMapperCustom;
     @Resource
     private RedisServiceImpl redisService;
+    @Resource
+    private IFileService fileService;
 
     /**
      * 注册
      *
      * @param user
      */
-    public void register(User user) {
+    public void register(User user) throws Exception{
 
         UserExample userExample = new UserExample();
         userExample.createCriteria().andPhoneEqualTo(user.getPhone());
@@ -55,6 +58,9 @@ public class UserServiceImpl implements IUserService {
         user.setStorageSize(10240);
         user.setStorageUsed(0);
         userMapper.insert(user);
+
+        //在hadoop集群中创建其专属的文件存储空间（文件夹）
+        fileService.makeDir(String.valueOf(user.getUserId()));
 
     }
 
@@ -120,11 +126,13 @@ public class UserServiceImpl implements IUserService {
      *
      * @param ids 要删除的用户的id的数组
      */
-    public void deleteUser(List ids) {
+    public void deleteUser(List ids) throws Exception{
         for(int i = 0 ;  i < ids.size(); i++){
             if(!(ids.get(i) instanceof Long || ids.get(i) instanceof Integer))
                 throw new ReqParmIncorException("参数非整型数据");
             userMapper.deleteByPrimaryKey( (Integer) ids.get(i));
+            //删除用户的存储空间
+            fileService.deleteDir( String.valueOf(ids.get(i)));
         }
     }
 

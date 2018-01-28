@@ -83,7 +83,7 @@ public class UserController {
     /**批量删除用户*/
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @Authorization
-    public JsonResult deleteDepartment(HttpServletRequest request , @RequestBody Map map) {
+    public JsonResult deleteDepartment(HttpServletRequest request , @RequestBody Map map) throws Exception {
         List ids =  (List)map.get("ids");
         userService.deleteUser(ids);
         String token = request.getHeader("authorization");
@@ -123,11 +123,10 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @Authorization
     public JsonResult updateUser(@RequestBody User user) throws Exception{
         userService.updateUser(user);
         return JsonResult.build(StatusCode.SUCCESS);
     }
-
-
 
 }

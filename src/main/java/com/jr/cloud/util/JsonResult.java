@@ -46,6 +46,13 @@ public class JsonResult {
         return new JsonResult(40045, message, null);
     }
 
+    //为自定义消息服务的
+    public static JsonResult customBuild(int code,String message) {
+        if(message == null)
+            message = "服务器未知错误";
+        return new JsonResult(code, message, null);
+    }
+
 
     // 完全ok构建起
     public static JsonResult ok(Object data) {

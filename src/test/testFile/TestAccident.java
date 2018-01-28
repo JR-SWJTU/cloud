@@ -1,5 +1,8 @@
 package testFile;
 
+import com.jr.cloud.dto.FileInfo;
+import com.jr.cloud.service.IFileService;
+import com.jr.cloud.service.impl.FileServiceImpl;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
@@ -7,11 +10,15 @@ import org.apache.hadoop.fs.FileUtil;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IOUtils;
 import org.junit.Test;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.io.File;
-import java.io.InputStream;
+import java.io.*;
 import java.net.URI;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import static java.lang.System.in;
+
 
 /**
  * Created by Administrator on 2017/10/22.
@@ -20,7 +27,18 @@ public class TestAccident {
 
     @Test
     public void test() {
-        ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:/spring/applicationContext-*.xml");
+//        ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:/spring/applicationContext-*.xml");
+        Date date= new Date(System.currentTimeMillis());
+        System.out.print(new SimpleDateFormat("yyyy-MM-dd HH:mm").format(date));
+        System.out.print(String.format("%.2f",3.244));
+        IFileService fileService = new FileServiceImpl();
+        try{
+
+            List<FileInfo> lsit = fileService.listFile("input");
+            System.out.print(lsit.get(0).getFileName());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 //        AccidentMapperCustom accidentMapperCustom = ctx.getBean(AccidentMapperCustom.class);
 
 //        AccidentQueryCondition condition = new AccidentQueryCondition();
@@ -64,11 +82,11 @@ public class TestAccident {
     @Test
     public void readFile(){
         // 获取读取源文件和目标文件位置参数
-        String local = "D:\\BugReport.txt";
+//        String local = "D:\\BugReport.txt";
+
 //        String uri = "hdfs://192.168.229.13:9000/input/APIAccess.log.2016-09-05.241";
         String uri = "hdfs://192.168.229.13:9000/input";
 
-        InputStream in = null;
         Configuration conf = new Configuration();
         try {
 
@@ -81,15 +99,40 @@ public class TestAccident {
             for(Path p : paths){
                 System.out.println(p);
             }
-//            in = fs.open(new Path(uri));
-//            IOUtils.copyBytes(in,System.out,4096,false);
+
 
         }catch (Exception e){
             e.printStackTrace();
         }
         finally {
-            IOUtils.closeStream(in);
+
         }
+    }
+
+    @Test
+    public void writeFile(){
+        String local = "D:\\hhh\\a.txt";
+        String uri = "hdfs://192.168.229.13:9000/input/a.txt";
+
+        Configuration conf = new Configuration();
+        OutputStream out = null;
+        try {
+
+            // 获取目标文件信息
+            InputStream in = new BufferedInputStream(new FileInputStream(local));
+
+            FileSystem fs = FileSystem.get(URI.create(uri), conf);
+            out = fs.create(new Path(uri));
+            IOUtils.copyBytes(in, out, 4096, true);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        finally {
+            IOUtils.closeStream(in);
+            if(out != null)
+                IOUtils.closeStream(out);
+        }
+
     }
 
     private  boolean deleteDir(File dir) {

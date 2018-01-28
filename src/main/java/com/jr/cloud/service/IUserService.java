@@ -15,7 +15,7 @@ public interface IUserService {
      * 注册
      * @param user
      */
-    void register(User user) throws CustomException;
+    void register(User user) throws CustomException, Exception;
 
     /**
      * 登录
@@ -33,7 +33,7 @@ public interface IUserService {
      * 删除用户
      * @param ids 要删除的用户的id的数组
      */
-    public void deleteUser(List ids);
+    public void deleteUser(List ids) throws Exception;
 
     /**
      * 查询一条用户数据

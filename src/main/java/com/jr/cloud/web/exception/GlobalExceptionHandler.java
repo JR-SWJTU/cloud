@@ -100,7 +100,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public JsonResult handCustomException(Exception e) {
         LOGGER.error(e.getMessage(), e);
-        return JsonResult.customBuild(e.getMessage());
+        return JsonResult.customBuild(40001, e.getMessage());
     }
 
     @ExceptionHandler(value = Exception.class)
