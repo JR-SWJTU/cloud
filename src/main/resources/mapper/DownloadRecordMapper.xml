@@ -5,8 +5,8 @@
     <id column="download_id" jdbcType="INTEGER" property="downloadId" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="file_name" jdbcType="VARCHAR" property="fileName" />
-    <result column="file_size" jdbcType="INTEGER" property="fileSize" />
-    <result column="download_date" jdbcType="VARCHAR" property="downloadDate" />
+    <result column="file_size" jdbcType="BIGINT" property="fileSize" />
+    <result column="download_date" jdbcType="TIMESTAMP" property="downloadDate" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -103,7 +103,7 @@
     insert into download_record (download_id, user_id, file_name, 
       file_size, download_date)
     values (#{downloadId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{fileName,jdbcType=VARCHAR}, 
-      #{fileSize,jdbcType=INTEGER}, #{downloadDate,jdbcType=VARCHAR})
+      #{fileSize,jdbcType=BIGINT}, #{downloadDate,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.jr.cloud.entity.DownloadRecord">
     insert into download_record
@@ -135,10 +135,10 @@
         #{fileName,jdbcType=VARCHAR},
       </if>
       <if test="fileSize != null">
-        #{fileSize,jdbcType=INTEGER},
+        #{fileSize,jdbcType=BIGINT},
       </if>
       <if test="downloadDate != null">
-        #{downloadDate,jdbcType=VARCHAR},
+        #{downloadDate,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -161,10 +161,10 @@
         file_name = #{record.fileName,jdbcType=VARCHAR},
       </if>
       <if test="record.fileSize != null">
-        file_size = #{record.fileSize,jdbcType=INTEGER},
+        file_size = #{record.fileSize,jdbcType=BIGINT},
       </if>
       <if test="record.downloadDate != null">
-        download_date = #{record.downloadDate,jdbcType=VARCHAR},
+        download_date = #{record.downloadDate,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null">
@@ -176,8 +176,8 @@
     set download_id = #{record.downloadId,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=INTEGER},
       file_name = #{record.fileName,jdbcType=VARCHAR},
-      file_size = #{record.fileSize,jdbcType=INTEGER},
-      download_date = #{record.downloadDate,jdbcType=VARCHAR}
+      file_size = #{record.fileSize,jdbcType=BIGINT},
+      download_date = #{record.downloadDate,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -192,10 +192,10 @@
         file_name = #{fileName,jdbcType=VARCHAR},
       </if>
       <if test="fileSize != null">
-        file_size = #{fileSize,jdbcType=INTEGER},
+        file_size = #{fileSize,jdbcType=BIGINT},
       </if>
       <if test="downloadDate != null">
-        download_date = #{downloadDate,jdbcType=VARCHAR},
+        download_date = #{downloadDate,jdbcType=TIMESTAMP},
       </if>
     </set>
     where download_id = #{downloadId,jdbcType=INTEGER}
@@ -204,8 +204,8 @@
     update download_record
     set user_id = #{userId,jdbcType=INTEGER},
       file_name = #{fileName,jdbcType=VARCHAR},
-      file_size = #{fileSize,jdbcType=INTEGER},
-      download_date = #{downloadDate,jdbcType=VARCHAR}
+      file_size = #{fileSize,jdbcType=BIGINT},
+      download_date = #{downloadDate,jdbcType=TIMESTAMP}
     where download_id = #{downloadId,jdbcType=INTEGER}
   </update>
 </mapper>

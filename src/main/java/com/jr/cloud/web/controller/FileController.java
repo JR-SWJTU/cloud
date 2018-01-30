@@ -1,6 +1,8 @@
 package com.jr.cloud.web.controller;
 
 import com.jr.cloud.annotation.Authorization;
+import com.jr.cloud.entity.DelRecord;
+import com.jr.cloud.service.IFileDelRecService;
 import com.jr.cloud.service.IFileService;
 import com.jr.cloud.util.JsonResult;
 import com.jr.cloud.util.enums.StatusCode;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -23,6 +26,8 @@ public class FileController {
 
     @Resource
     private IFileService fileService;
+    @Resource
+    private IFileDelRecService fileDelRecService;
 
     @RequestMapping(value = "/listFiles", method = RequestMethod.POST)
     @Authorization
@@ -43,7 +48,16 @@ public class FileController {
     @Authorization
     public JsonResult deleteDir( @RequestBody Map map) throws Exception{
         String path = (String)map.get("path");
-        fileService.deleteDir( path );
+        Integer id = (Integer)map.get("id");
+//        fileService.deleteDir( path );
+        //移动文件到用户专属的文件回收站文件夹中
+        fileService.moveFile(path, String.valueOf(id)+ "DelSpace");
+        //在数据库中添加一条文件删除记录
+        DelRecord rec = new DelRecord();
+        rec.setUserId(id);
+        rec.setFileName(String.valueOf(id)+ "DelSpace" + path.substring( path.lastIndexOf("/") + 1));
+        rec.setDelDate( new Date(System.currentTimeMillis()));
+        fileDelRecService.addDelRec(rec);
         return JsonResult.build(StatusCode.SUCCESS);
     }
 
@@ -73,4 +87,7 @@ public class FileController {
         fileService.copyFile(src, des );
         return JsonResult.build(StatusCode.SUCCESS);
     }
+
+
+
 }

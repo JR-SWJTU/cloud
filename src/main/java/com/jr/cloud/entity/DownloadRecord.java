@@ -1,5 +1,7 @@
 package com.jr.cloud.entity;
 
+import java.util.Date;
+
 public class DownloadRecord {
     private Integer downloadId;
 
@@ -7,9 +9,9 @@ public class DownloadRecord {
 
     private String fileName;
 
-    private Integer fileSize;
+    private Long fileSize;
 
-    private String downloadDate;
+    private Date downloadDate;
 
     public Integer getDownloadId() {
         return downloadId;
@@ -35,20 +37,20 @@ public class DownloadRecord {
         this.fileName = fileName == null ? null : fileName.trim();
     }
 
-    public Integer getFileSize() {
+    public Long getFileSize() {
         return fileSize;
     }
 
-    public void setFileSize(Integer fileSize) {
+    public void setFileSize(Long fileSize) {
         this.fileSize = fileSize;
     }
 
-    public String getDownloadDate() {
+    public Date getDownloadDate() {
         return downloadDate;
     }
 
-    public void setDownloadDate(String downloadDate) {
-        this.downloadDate = downloadDate == null ? null : downloadDate.trim();
+    public void setDownloadDate(Date downloadDate) {
+        this.downloadDate = downloadDate;
     }
 
     @Override

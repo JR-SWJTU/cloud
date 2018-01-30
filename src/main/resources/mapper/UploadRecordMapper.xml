@@ -5,10 +5,9 @@
     <id column="upload_id" jdbcType="INTEGER" property="uploadId" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="file_name" jdbcType="VARCHAR" property="fileName" />
-    <result column="file_size" jdbcType="INTEGER" property="fileSize" />
-    <result column="upload_date" jdbcType="VARCHAR" property="uploadDate" />
+    <result column="file_size" jdbcType="BIGINT" property="fileSize" />
+    <result column="upload_date" jdbcType="TIMESTAMP" property="uploadDate" />
     <result column="uploaded_slice_num" jdbcType="INTEGER" property="uploadedSliceNum" />
-    <result column="slice_size" jdbcType="INTEGER" property="sliceSize" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    upload_id, user_id, file_name, file_size, upload_date, uploaded_slice_num, slice_size
+    upload_id, user_id, file_name, file_size, upload_date, uploaded_slice_num
   </sql>
   <select id="selectByExample" parameterType="com.jr.cloud.entity.UploadRecordExample" resultMap="BaseResultMap">
     select
@@ -103,11 +102,11 @@
   </delete>
   <insert id="insert" parameterType="com.jr.cloud.entity.UploadRecord">
     insert into upload_record (upload_id, user_id, file_name, 
-      file_size, upload_date, uploaded_slice_num, 
-      slice_size)
+      file_size, upload_date, uploaded_slice_num
+      )
     values (#{uploadId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{fileName,jdbcType=VARCHAR}, 
-      #{fileSize,jdbcType=INTEGER}, #{uploadDate,jdbcType=VARCHAR}, #{uploadedSliceNum,jdbcType=INTEGER}, 
-      #{sliceSize,jdbcType=INTEGER})
+      #{fileSize,jdbcType=BIGINT}, #{uploadDate,jdbcType=TIMESTAMP}, #{uploadedSliceNum,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.jr.cloud.entity.UploadRecord">
     insert into upload_record
@@ -130,9 +129,6 @@
       <if test="uploadedSliceNum != null">
         uploaded_slice_num,
       </if>
-      <if test="sliceSize != null">
-        slice_size,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="uploadId != null">
@@ -145,16 +141,13 @@
         #{fileName,jdbcType=VARCHAR},
       </if>
       <if test="fileSize != null">
-        #{fileSize,jdbcType=INTEGER},
+        #{fileSize,jdbcType=BIGINT},
       </if>
       <if test="uploadDate != null">
-        #{uploadDate,jdbcType=VARCHAR},
+        #{uploadDate,jdbcType=TIMESTAMP},
       </if>
       <if test="uploadedSliceNum != null">
         #{uploadedSliceNum,jdbcType=INTEGER},
-      </if>
-      <if test="sliceSize != null">
-        #{sliceSize,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -177,16 +170,13 @@
         file_name = #{record.fileName,jdbcType=VARCHAR},
       </if>
       <if test="record.fileSize != null">
-        file_size = #{record.fileSize,jdbcType=INTEGER},
+        file_size = #{record.fileSize,jdbcType=BIGINT},
       </if>
       <if test="record.uploadDate != null">
-        upload_date = #{record.uploadDate,jdbcType=VARCHAR},
+        upload_date = #{record.uploadDate,jdbcType=TIMESTAMP},
       </if>
       <if test="record.uploadedSliceNum != null">
         uploaded_slice_num = #{record.uploadedSliceNum,jdbcType=INTEGER},
-      </if>
-      <if test="record.sliceSize != null">
-        slice_size = #{record.sliceSize,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null">
@@ -198,10 +188,9 @@
     set upload_id = #{record.uploadId,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=INTEGER},
       file_name = #{record.fileName,jdbcType=VARCHAR},
-      file_size = #{record.fileSize,jdbcType=INTEGER},
-      upload_date = #{record.uploadDate,jdbcType=VARCHAR},
-      uploaded_slice_num = #{record.uploadedSliceNum,jdbcType=INTEGER},
-      slice_size = #{record.sliceSize,jdbcType=INTEGER}
+      file_size = #{record.fileSize,jdbcType=BIGINT},
+      upload_date = #{record.uploadDate,jdbcType=TIMESTAMP},
+      uploaded_slice_num = #{record.uploadedSliceNum,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -216,16 +205,13 @@
         file_name = #{fileName,jdbcType=VARCHAR},
       </if>
       <if test="fileSize != null">
-        file_size = #{fileSize,jdbcType=INTEGER},
+        file_size = #{fileSize,jdbcType=BIGINT},
       </if>
       <if test="uploadDate != null">
-        upload_date = #{uploadDate,jdbcType=VARCHAR},
+        upload_date = #{uploadDate,jdbcType=TIMESTAMP},
       </if>
       <if test="uploadedSliceNum != null">
         uploaded_slice_num = #{uploadedSliceNum,jdbcType=INTEGER},
-      </if>
-      <if test="sliceSize != null">
-        slice_size = #{sliceSize,jdbcType=INTEGER},
       </if>
     </set>
     where upload_id = #{uploadId,jdbcType=INTEGER}
@@ -234,10 +220,9 @@
     update upload_record
     set user_id = #{userId,jdbcType=INTEGER},
       file_name = #{fileName,jdbcType=VARCHAR},
-      file_size = #{fileSize,jdbcType=INTEGER},
-      upload_date = #{uploadDate,jdbcType=VARCHAR},
-      uploaded_slice_num = #{uploadedSliceNum,jdbcType=INTEGER},
-      slice_size = #{sliceSize,jdbcType=INTEGER}
+      file_size = #{fileSize,jdbcType=BIGINT},
+      upload_date = #{uploadDate,jdbcType=TIMESTAMP},
+      uploaded_slice_num = #{uploadedSliceNum,jdbcType=INTEGER}
     where upload_id = #{uploadId,jdbcType=INTEGER}
   </update>
 </mapper>

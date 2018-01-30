@@ -1,6 +1,7 @@
 package com.jr.cloud.entity;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DownloadRecordExample {
@@ -304,52 +305,52 @@ public class DownloadRecordExample {
             return (Criteria) this;
         }
 
-        public Criteria andFileSizeEqualTo(Integer value) {
+        public Criteria andFileSizeEqualTo(Long value) {
             addCriterion("file_size =", value, "fileSize");
             return (Criteria) this;
         }
 
-        public Criteria andFileSizeNotEqualTo(Integer value) {
+        public Criteria andFileSizeNotEqualTo(Long value) {
             addCriterion("file_size <>", value, "fileSize");
             return (Criteria) this;
         }
 
-        public Criteria andFileSizeGreaterThan(Integer value) {
+        public Criteria andFileSizeGreaterThan(Long value) {
             addCriterion("file_size >", value, "fileSize");
             return (Criteria) this;
         }
 
-        public Criteria andFileSizeGreaterThanOrEqualTo(Integer value) {
+        public Criteria andFileSizeGreaterThanOrEqualTo(Long value) {
             addCriterion("file_size >=", value, "fileSize");
             return (Criteria) this;
         }
 
-        public Criteria andFileSizeLessThan(Integer value) {
+        public Criteria andFileSizeLessThan(Long value) {
             addCriterion("file_size <", value, "fileSize");
             return (Criteria) this;
         }
 
-        public Criteria andFileSizeLessThanOrEqualTo(Integer value) {
+        public Criteria andFileSizeLessThanOrEqualTo(Long value) {
             addCriterion("file_size <=", value, "fileSize");
             return (Criteria) this;
         }
 
-        public Criteria andFileSizeIn(List<Integer> values) {
+        public Criteria andFileSizeIn(List<Long> values) {
             addCriterion("file_size in", values, "fileSize");
             return (Criteria) this;
         }
 
-        public Criteria andFileSizeNotIn(List<Integer> values) {
+        public Criteria andFileSizeNotIn(List<Long> values) {
             addCriterion("file_size not in", values, "fileSize");
             return (Criteria) this;
         }
 
-        public Criteria andFileSizeBetween(Integer value1, Integer value2) {
+        public Criteria andFileSizeBetween(Long value1, Long value2) {
             addCriterion("file_size between", value1, value2, "fileSize");
             return (Criteria) this;
         }
 
-        public Criteria andFileSizeNotBetween(Integer value1, Integer value2) {
+        public Criteria andFileSizeNotBetween(Long value1, Long value2) {
             addCriterion("file_size not between", value1, value2, "fileSize");
             return (Criteria) this;
         }
@@ -364,62 +365,52 @@ public class DownloadRecordExample {
             return (Criteria) this;
         }
 
-        public Criteria andDownloadDateEqualTo(String value) {
+        public Criteria andDownloadDateEqualTo(Date value) {
             addCriterion("download_date =", value, "downloadDate");
             return (Criteria) this;
         }
 
-        public Criteria andDownloadDateNotEqualTo(String value) {
+        public Criteria andDownloadDateNotEqualTo(Date value) {
             addCriterion("download_date <>", value, "downloadDate");
             return (Criteria) this;
         }
 
-        public Criteria andDownloadDateGreaterThan(String value) {
+        public Criteria andDownloadDateGreaterThan(Date value) {
             addCriterion("download_date >", value, "downloadDate");
             return (Criteria) this;
         }
 
-        public Criteria andDownloadDateGreaterThanOrEqualTo(String value) {
+        public Criteria andDownloadDateGreaterThanOrEqualTo(Date value) {
             addCriterion("download_date >=", value, "downloadDate");
             return (Criteria) this;
         }
 
-        public Criteria andDownloadDateLessThan(String value) {
+        public Criteria andDownloadDateLessThan(Date value) {
             addCriterion("download_date <", value, "downloadDate");
             return (Criteria) this;
         }
 
-        public Criteria andDownloadDateLessThanOrEqualTo(String value) {
+        public Criteria andDownloadDateLessThanOrEqualTo(Date value) {
             addCriterion("download_date <=", value, "downloadDate");
             return (Criteria) this;
         }
 
-        public Criteria andDownloadDateLike(String value) {
-            addCriterion("download_date like", value, "downloadDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andDownloadDateNotLike(String value) {
-            addCriterion("download_date not like", value, "downloadDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andDownloadDateIn(List<String> values) {
+        public Criteria andDownloadDateIn(List<Date> values) {
             addCriterion("download_date in", values, "downloadDate");
             return (Criteria) this;
         }
 
-        public Criteria andDownloadDateNotIn(List<String> values) {
+        public Criteria andDownloadDateNotIn(List<Date> values) {
             addCriterion("download_date not in", values, "downloadDate");
             return (Criteria) this;
         }
 
-        public Criteria andDownloadDateBetween(String value1, String value2) {
+        public Criteria andDownloadDateBetween(Date value1, Date value2) {
             addCriterion("download_date between", value1, value2, "downloadDate");
             return (Criteria) this;
         }
 
-        public Criteria andDownloadDateNotBetween(String value1, String value2) {
+        public Criteria andDownloadDateNotBetween(Date value1, Date value2) {
             addCriterion("download_date not between", value1, value2, "downloadDate");
             return (Criteria) this;
         }

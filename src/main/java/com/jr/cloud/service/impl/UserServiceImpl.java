@@ -61,7 +61,8 @@ public class UserServiceImpl implements IUserService {
 
         //在hadoop集群中创建其专属的文件存储空间（文件夹）
         fileService.makeDir(String.valueOf(user.getUserId()));
-
+        //在hadoop集群中创建其专属的回收站文件存储空间（文件夹）
+        fileService.makeDir(String.valueOf(user.getUserId()) + "DelSpace");
     }
 
     /**

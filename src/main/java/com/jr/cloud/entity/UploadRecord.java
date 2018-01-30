@@ -1,5 +1,7 @@
 package com.jr.cloud.entity;
 
+import java.util.Date;
+
 public class UploadRecord {
     private Integer uploadId;
 
@@ -7,13 +9,11 @@ public class UploadRecord {
 
     private String fileName;
 
-    private Integer fileSize;
+    private Long fileSize;
 
-    private String uploadDate;
+    private Date uploadDate;
 
     private Integer uploadedSliceNum;
-
-    private Integer sliceSize;
 
     public Integer getUploadId() {
         return uploadId;
@@ -39,20 +39,20 @@ public class UploadRecord {
         this.fileName = fileName == null ? null : fileName.trim();
     }
 
-    public Integer getFileSize() {
+    public Long getFileSize() {
         return fileSize;
     }
 
-    public void setFileSize(Integer fileSize) {
+    public void setFileSize(Long fileSize) {
         this.fileSize = fileSize;
     }
 
-    public String getUploadDate() {
+    public Date getUploadDate() {
         return uploadDate;
     }
 
-    public void setUploadDate(String uploadDate) {
-        this.uploadDate = uploadDate == null ? null : uploadDate.trim();
+    public void setUploadDate(Date uploadDate) {
+        this.uploadDate = uploadDate;
     }
 
     public Integer getUploadedSliceNum() {
@@ -61,14 +61,6 @@ public class UploadRecord {
 
     public void setUploadedSliceNum(Integer uploadedSliceNum) {
         this.uploadedSliceNum = uploadedSliceNum;
-    }
-
-    public Integer getSliceSize() {
-        return sliceSize;
-    }
-
-    public void setSliceSize(Integer sliceSize) {
-        this.sliceSize = sliceSize;
     }
 
     @Override
@@ -83,7 +75,6 @@ public class UploadRecord {
         sb.append(", fileSize=").append(fileSize);
         sb.append(", uploadDate=").append(uploadDate);
         sb.append(", uploadedSliceNum=").append(uploadedSliceNum);
-        sb.append(", sliceSize=").append(sliceSize);
         sb.append("]");
         return sb.toString();
     }
@@ -105,8 +96,7 @@ public class UploadRecord {
             && (this.getFileName() == null ? other.getFileName() == null : this.getFileName().equals(other.getFileName()))
             && (this.getFileSize() == null ? other.getFileSize() == null : this.getFileSize().equals(other.getFileSize()))
             && (this.getUploadDate() == null ? other.getUploadDate() == null : this.getUploadDate().equals(other.getUploadDate()))
-            && (this.getUploadedSliceNum() == null ? other.getUploadedSliceNum() == null : this.getUploadedSliceNum().equals(other.getUploadedSliceNum()))
-            && (this.getSliceSize() == null ? other.getSliceSize() == null : this.getSliceSize().equals(other.getSliceSize()));
+            && (this.getUploadedSliceNum() == null ? other.getUploadedSliceNum() == null : this.getUploadedSliceNum().equals(other.getUploadedSliceNum()));
     }
 
     @Override
@@ -119,7 +109,6 @@ public class UploadRecord {
         result = prime * result + ((getFileSize() == null) ? 0 : getFileSize().hashCode());
         result = prime * result + ((getUploadDate() == null) ? 0 : getUploadDate().hashCode());
         result = prime * result + ((getUploadedSliceNum() == null) ? 0 : getUploadedSliceNum().hashCode());
-        result = prime * result + ((getSliceSize() == null) ? 0 : getSliceSize().hashCode());
         return result;
     }
 }

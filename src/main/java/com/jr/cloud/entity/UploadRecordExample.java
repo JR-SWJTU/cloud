@@ -1,6 +1,7 @@
 package com.jr.cloud.entity;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class UploadRecordExample {
@@ -304,52 +305,52 @@ public class UploadRecordExample {
             return (Criteria) this;
         }
 
-        public Criteria andFileSizeEqualTo(Integer value) {
+        public Criteria andFileSizeEqualTo(Long value) {
             addCriterion("file_size =", value, "fileSize");
             return (Criteria) this;
         }
 
-        public Criteria andFileSizeNotEqualTo(Integer value) {
+        public Criteria andFileSizeNotEqualTo(Long value) {
             addCriterion("file_size <>", value, "fileSize");
             return (Criteria) this;
         }
 
-        public Criteria andFileSizeGreaterThan(Integer value) {
+        public Criteria andFileSizeGreaterThan(Long value) {
             addCriterion("file_size >", value, "fileSize");
             return (Criteria) this;
         }
 
-        public Criteria andFileSizeGreaterThanOrEqualTo(Integer value) {
+        public Criteria andFileSizeGreaterThanOrEqualTo(Long value) {
             addCriterion("file_size >=", value, "fileSize");
             return (Criteria) this;
         }
 
-        public Criteria andFileSizeLessThan(Integer value) {
+        public Criteria andFileSizeLessThan(Long value) {
             addCriterion("file_size <", value, "fileSize");
             return (Criteria) this;
         }
 
-        public Criteria andFileSizeLessThanOrEqualTo(Integer value) {
+        public Criteria andFileSizeLessThanOrEqualTo(Long value) {
             addCriterion("file_size <=", value, "fileSize");
             return (Criteria) this;
         }
 
-        public Criteria andFileSizeIn(List<Integer> values) {
+        public Criteria andFileSizeIn(List<Long> values) {
             addCriterion("file_size in", values, "fileSize");
             return (Criteria) this;
         }
 
-        public Criteria andFileSizeNotIn(List<Integer> values) {
+        public Criteria andFileSizeNotIn(List<Long> values) {
             addCriterion("file_size not in", values, "fileSize");
             return (Criteria) this;
         }
 
-        public Criteria andFileSizeBetween(Integer value1, Integer value2) {
+        public Criteria andFileSizeBetween(Long value1, Long value2) {
             addCriterion("file_size between", value1, value2, "fileSize");
             return (Criteria) this;
         }
 
-        public Criteria andFileSizeNotBetween(Integer value1, Integer value2) {
+        public Criteria andFileSizeNotBetween(Long value1, Long value2) {
             addCriterion("file_size not between", value1, value2, "fileSize");
             return (Criteria) this;
         }
@@ -364,62 +365,52 @@ public class UploadRecordExample {
             return (Criteria) this;
         }
 
-        public Criteria andUploadDateEqualTo(String value) {
+        public Criteria andUploadDateEqualTo(Date value) {
             addCriterion("upload_date =", value, "uploadDate");
             return (Criteria) this;
         }
 
-        public Criteria andUploadDateNotEqualTo(String value) {
+        public Criteria andUploadDateNotEqualTo(Date value) {
             addCriterion("upload_date <>", value, "uploadDate");
             return (Criteria) this;
         }
 
-        public Criteria andUploadDateGreaterThan(String value) {
+        public Criteria andUploadDateGreaterThan(Date value) {
             addCriterion("upload_date >", value, "uploadDate");
             return (Criteria) this;
         }
 
-        public Criteria andUploadDateGreaterThanOrEqualTo(String value) {
+        public Criteria andUploadDateGreaterThanOrEqualTo(Date value) {
             addCriterion("upload_date >=", value, "uploadDate");
             return (Criteria) this;
         }
 
-        public Criteria andUploadDateLessThan(String value) {
+        public Criteria andUploadDateLessThan(Date value) {
             addCriterion("upload_date <", value, "uploadDate");
             return (Criteria) this;
         }
 
-        public Criteria andUploadDateLessThanOrEqualTo(String value) {
+        public Criteria andUploadDateLessThanOrEqualTo(Date value) {
             addCriterion("upload_date <=", value, "uploadDate");
             return (Criteria) this;
         }
 
-        public Criteria andUploadDateLike(String value) {
-            addCriterion("upload_date like", value, "uploadDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andUploadDateNotLike(String value) {
-            addCriterion("upload_date not like", value, "uploadDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andUploadDateIn(List<String> values) {
+        public Criteria andUploadDateIn(List<Date> values) {
             addCriterion("upload_date in", values, "uploadDate");
             return (Criteria) this;
         }
 
-        public Criteria andUploadDateNotIn(List<String> values) {
+        public Criteria andUploadDateNotIn(List<Date> values) {
             addCriterion("upload_date not in", values, "uploadDate");
             return (Criteria) this;
         }
 
-        public Criteria andUploadDateBetween(String value1, String value2) {
+        public Criteria andUploadDateBetween(Date value1, Date value2) {
             addCriterion("upload_date between", value1, value2, "uploadDate");
             return (Criteria) this;
         }
 
-        public Criteria andUploadDateNotBetween(String value1, String value2) {
+        public Criteria andUploadDateNotBetween(Date value1, Date value2) {
             addCriterion("upload_date not between", value1, value2, "uploadDate");
             return (Criteria) this;
         }
@@ -481,66 +472,6 @@ public class UploadRecordExample {
 
         public Criteria andUploadedSliceNumNotBetween(Integer value1, Integer value2) {
             addCriterion("uploaded_slice_num not between", value1, value2, "uploadedSliceNum");
-            return (Criteria) this;
-        }
-
-        public Criteria andSliceSizeIsNull() {
-            addCriterion("slice_size is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSliceSizeIsNotNull() {
-            addCriterion("slice_size is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSliceSizeEqualTo(Integer value) {
-            addCriterion("slice_size =", value, "sliceSize");
-            return (Criteria) this;
-        }
-
-        public Criteria andSliceSizeNotEqualTo(Integer value) {
-            addCriterion("slice_size <>", value, "sliceSize");
-            return (Criteria) this;
-        }
-
-        public Criteria andSliceSizeGreaterThan(Integer value) {
-            addCriterion("slice_size >", value, "sliceSize");
-            return (Criteria) this;
-        }
-
-        public Criteria andSliceSizeGreaterThanOrEqualTo(Integer value) {
-            addCriterion("slice_size >=", value, "sliceSize");
-            return (Criteria) this;
-        }
-
-        public Criteria andSliceSizeLessThan(Integer value) {
-            addCriterion("slice_size <", value, "sliceSize");
-            return (Criteria) this;
-        }
-
-        public Criteria andSliceSizeLessThanOrEqualTo(Integer value) {
-            addCriterion("slice_size <=", value, "sliceSize");
-            return (Criteria) this;
-        }
-
-        public Criteria andSliceSizeIn(List<Integer> values) {
-            addCriterion("slice_size in", values, "sliceSize");
-            return (Criteria) this;
-        }
-
-        public Criteria andSliceSizeNotIn(List<Integer> values) {
-            addCriterion("slice_size not in", values, "sliceSize");
-            return (Criteria) this;
-        }
-
-        public Criteria andSliceSizeBetween(Integer value1, Integer value2) {
-            addCriterion("slice_size between", value1, value2, "sliceSize");
-            return (Criteria) this;
-        }
-
-        public Criteria andSliceSizeNotBetween(Integer value1, Integer value2) {
-            addCriterion("slice_size not between", value1, value2, "sliceSize");
             return (Criteria) this;
         }
     }
