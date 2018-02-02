@@ -210,15 +210,8 @@
 
                 savePath: "1/aaa",
 
-                fileName : "aaa.jpg",
+                fileName : "aaa.jpg"
 
-                fileSize : 10,
-
-                uploadDate : "2018-01-10 12:12:12",
-
-                uploadedSliceNum : 20,
-
-                uploadedSize :  10
             };
             console.log(JSON.stringify(rec));
             $.ajax({

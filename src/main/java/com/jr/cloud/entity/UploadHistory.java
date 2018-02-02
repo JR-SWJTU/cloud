@@ -15,6 +15,9 @@ public class UploadHistory {
 
     private Date uploadDate;
 
+    public UploadHistory(){
+    }
+
     public UploadHistory(UploadRecord rec){
         this.userId = rec.getUserId();
         this.fileSize = rec.getFileSize();

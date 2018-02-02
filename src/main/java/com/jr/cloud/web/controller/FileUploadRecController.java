@@ -47,7 +47,7 @@ public class FileUploadRecController {
         if( !fs.exists( path)){
             fs.mkdirs( path);
         }
-        return JsonResult.build(StatusCode.SUCCESS, rec);
+        return JsonResult.build(StatusCode.SUCCESS, rec.getUploadId());
     }
 
     /**
