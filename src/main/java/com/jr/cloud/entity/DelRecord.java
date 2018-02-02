@@ -1,5 +1,7 @@
 package com.jr.cloud.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class DelRecord {
@@ -11,6 +13,7 @@ public class DelRecord {
 
     private String savePath;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date delDate;
 
     public Integer getDelId() {

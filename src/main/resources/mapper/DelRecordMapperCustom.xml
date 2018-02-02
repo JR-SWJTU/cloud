@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.swjtu.roadCheck.mapper.AdminMapperCustom">
+<mapper namespace="com.jr.cloud.mapper.DelRecordMapperCustom">
 
     <select id="queryExpireRec" resultType="com.jr.cloud.entity.DelRecord">
         SELECT
@@ -10,7 +10,7 @@
         FROM
         del_record
         WHERE
-        datediff(day，getdate() ,del_date )<![CDATA[ <= ]]> 10
+        datediff(NOW() ,del_date ) <![CDATA[ <= ]]>   10
     </select>
 
     <select id="delExpireRec" >
@@ -18,7 +18,7 @@
         FROM
         del_record
         WHERE
-        datediff(day，getdate() ,del_date )<![CDATA[ <= ]]> 10
+        datediff(NOW() ,del_date )<![CDATA[ <= ]]> 10
     </select>
 
 </mapper>
