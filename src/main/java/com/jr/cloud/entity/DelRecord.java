@@ -9,6 +9,8 @@ public class DelRecord {
 
     private String fileName;
 
+    private String savePath;
+
     private Date delDate;
 
     public Integer getDelId() {
@@ -35,6 +37,14 @@ public class DelRecord {
         this.fileName = fileName == null ? null : fileName.trim();
     }
 
+    public String getSavePath() {
+        return savePath;
+    }
+
+    public void setSavePath(String savePath) {
+        this.savePath = savePath == null ? null : savePath.trim();
+    }
+
     public Date getDelDate() {
         return delDate;
     }
@@ -52,6 +62,7 @@ public class DelRecord {
         sb.append(", delId=").append(delId);
         sb.append(", userId=").append(userId);
         sb.append(", fileName=").append(fileName);
+        sb.append(", savePath=").append(savePath);
         sb.append(", delDate=").append(delDate);
         sb.append("]");
         return sb.toString();
@@ -72,6 +83,7 @@ public class DelRecord {
         return (this.getDelId() == null ? other.getDelId() == null : this.getDelId().equals(other.getDelId()))
             && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
             && (this.getFileName() == null ? other.getFileName() == null : this.getFileName().equals(other.getFileName()))
+            && (this.getSavePath() == null ? other.getSavePath() == null : this.getSavePath().equals(other.getSavePath()))
             && (this.getDelDate() == null ? other.getDelDate() == null : this.getDelDate().equals(other.getDelDate()));
     }
 
@@ -82,6 +94,7 @@ public class DelRecord {
         result = prime * result + ((getDelId() == null) ? 0 : getDelId().hashCode());
         result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
         result = prime * result + ((getFileName() == null) ? 0 : getFileName().hashCode());
+        result = prime * result + ((getSavePath() == null) ? 0 : getSavePath().hashCode());
         result = prime * result + ((getDelDate() == null) ? 0 : getDelDate().hashCode());
         return result;
     }

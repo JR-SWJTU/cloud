@@ -7,6 +7,8 @@
     <result column="file_name" jdbcType="VARCHAR" property="fileName" />
     <result column="file_size" jdbcType="BIGINT" property="fileSize" />
     <result column="download_date" jdbcType="TIMESTAMP" property="downloadDate" />
+    <result column="download_size" jdbcType="BIGINT" property="downloadSize" />
+    <result column="save_path" jdbcType="VARCHAR" property="savePath" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -67,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    download_id, user_id, file_name, file_size, download_date
+    download_id, user_id, file_name, file_size, download_date, download_size, save_path
   </sql>
   <select id="selectByExample" parameterType="com.jr.cloud.entity.DownloadRecordExample" resultMap="BaseResultMap">
     select
@@ -101,9 +103,11 @@
   </delete>
   <insert id="insert" parameterType="com.jr.cloud.entity.DownloadRecord">
     insert into download_record (download_id, user_id, file_name, 
-      file_size, download_date)
+      file_size, download_date, download_size, 
+      save_path)
     values (#{downloadId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{fileName,jdbcType=VARCHAR}, 
-      #{fileSize,jdbcType=BIGINT}, #{downloadDate,jdbcType=TIMESTAMP})
+      #{fileSize,jdbcType=BIGINT}, #{downloadDate,jdbcType=TIMESTAMP}, #{downloadSize,jdbcType=BIGINT}, 
+      #{savePath,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jr.cloud.entity.DownloadRecord">
     insert into download_record
@@ -123,6 +127,12 @@
       <if test="downloadDate != null">
         download_date,
       </if>
+      <if test="downloadSize != null">
+        download_size,
+      </if>
+      <if test="savePath != null">
+        save_path,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="downloadId != null">
@@ -139,6 +149,12 @@
       </if>
       <if test="downloadDate != null">
         #{downloadDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="downloadSize != null">
+        #{downloadSize,jdbcType=BIGINT},
+      </if>
+      <if test="savePath != null">
+        #{savePath,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -166,6 +182,12 @@
       <if test="record.downloadDate != null">
         download_date = #{record.downloadDate,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.downloadSize != null">
+        download_size = #{record.downloadSize,jdbcType=BIGINT},
+      </if>
+      <if test="record.savePath != null">
+        save_path = #{record.savePath,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -177,7 +199,9 @@
       user_id = #{record.userId,jdbcType=INTEGER},
       file_name = #{record.fileName,jdbcType=VARCHAR},
       file_size = #{record.fileSize,jdbcType=BIGINT},
-      download_date = #{record.downloadDate,jdbcType=TIMESTAMP}
+      download_date = #{record.downloadDate,jdbcType=TIMESTAMP},
+      download_size = #{record.downloadSize,jdbcType=BIGINT},
+      save_path = #{record.savePath,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -197,6 +221,12 @@
       <if test="downloadDate != null">
         download_date = #{downloadDate,jdbcType=TIMESTAMP},
       </if>
+      <if test="downloadSize != null">
+        download_size = #{downloadSize,jdbcType=BIGINT},
+      </if>
+      <if test="savePath != null">
+        save_path = #{savePath,jdbcType=VARCHAR},
+      </if>
     </set>
     where download_id = #{downloadId,jdbcType=INTEGER}
   </update>
@@ -205,7 +235,9 @@
     set user_id = #{userId,jdbcType=INTEGER},
       file_name = #{fileName,jdbcType=VARCHAR},
       file_size = #{fileSize,jdbcType=BIGINT},
-      download_date = #{downloadDate,jdbcType=TIMESTAMP}
+      download_date = #{downloadDate,jdbcType=TIMESTAMP},
+      download_size = #{downloadSize,jdbcType=BIGINT},
+      save_path = #{savePath,jdbcType=VARCHAR}
     where download_id = #{downloadId,jdbcType=INTEGER}
   </update>
 </mapper>

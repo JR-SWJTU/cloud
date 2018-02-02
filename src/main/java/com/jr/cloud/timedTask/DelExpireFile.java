@@ -1,14 +1,10 @@
 package com.jr.cloud.timedTask;
 
-
 import com.jr.cloud.entity.DelRecord;
 import com.jr.cloud.mapper.DelRecordMapperCustom;
 import com.jr.cloud.service.IFileDelRecService;
 import com.jr.cloud.service.IFileService;
 import com.jr.cloud.util.PageResult;
-import org.quartz.Job;
-import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,21 +12,21 @@ import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
-public class DeleteExpireDelFile implements Job{
+/**
+ * Created by Administrator on 2018/1/31.
+ */
+public class DelExpireFile  {
 
-    private static Logger _log = LoggerFactory.getLogger(DeleteExpireDelFile.class);
+    private static final Logger _log = LoggerFactory.getLogger(DelExpireFile.class);
 
     @Resource
     private IFileDelRecService fileDelRecService;
     @Resource
-    private IFileService fileService;
-    @Resource
     private DelRecordMapperCustom delRecordMapperCustom;
+    @Resource
+    private IFileService fileService;
 
-    //定时任务,每天定时检查删除文件记录表中过期的文件，并将其彻底删除
-    public void execute(JobExecutionContext context)
-            throws JobExecutionException {
-
+    public void execute() {
         PageResult res = null;
         res.setTotal((long)100);
         for(int i = 0 ;  res.getTotal() == 100 ;i++){
@@ -54,5 +50,4 @@ public class DeleteExpireDelFile implements Job{
 
         _log.error("定时删除文件任务执行时间: " + new Date());
     }
-
 }

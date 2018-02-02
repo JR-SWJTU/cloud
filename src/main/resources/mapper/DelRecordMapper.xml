@@ -5,6 +5,7 @@
     <id column="del_id" jdbcType="INTEGER" property="delId" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="file_name" jdbcType="VARCHAR" property="fileName" />
+    <result column="save_path" jdbcType="VARCHAR" property="savePath" />
     <result column="del_date" jdbcType="TIMESTAMP" property="delDate" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    del_id, user_id, file_name, del_date
+    del_id, user_id, file_name, save_path, del_date
   </sql>
   <select id="selectByExample" parameterType="com.jr.cloud.entity.DelRecordExample" resultMap="BaseResultMap">
     select
@@ -100,9 +101,9 @@
   </delete>
   <insert id="insert" parameterType="com.jr.cloud.entity.DelRecord">
     insert into del_record (del_id, user_id, file_name, 
-      del_date)
+      save_path, del_date)
     values (#{delId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{fileName,jdbcType=VARCHAR}, 
-      #{delDate,jdbcType=TIMESTAMP})
+      #{savePath,jdbcType=VARCHAR}, #{delDate,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.jr.cloud.entity.DelRecord">
     insert into del_record
@@ -115,6 +116,9 @@
       </if>
       <if test="fileName != null">
         file_name,
+      </if>
+      <if test="savePath != null">
+        save_path,
       </if>
       <if test="delDate != null">
         del_date,
@@ -129,6 +133,9 @@
       </if>
       <if test="fileName != null">
         #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="savePath != null">
+        #{savePath,jdbcType=VARCHAR},
       </if>
       <if test="delDate != null">
         #{delDate,jdbcType=TIMESTAMP},
@@ -153,6 +160,9 @@
       <if test="record.fileName != null">
         file_name = #{record.fileName,jdbcType=VARCHAR},
       </if>
+      <if test="record.savePath != null">
+        save_path = #{record.savePath,jdbcType=VARCHAR},
+      </if>
       <if test="record.delDate != null">
         del_date = #{record.delDate,jdbcType=TIMESTAMP},
       </if>
@@ -166,6 +176,7 @@
     set del_id = #{record.delId,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=INTEGER},
       file_name = #{record.fileName,jdbcType=VARCHAR},
+      save_path = #{record.savePath,jdbcType=VARCHAR},
       del_date = #{record.delDate,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -180,6 +191,9 @@
       <if test="fileName != null">
         file_name = #{fileName,jdbcType=VARCHAR},
       </if>
+      <if test="savePath != null">
+        save_path = #{savePath,jdbcType=VARCHAR},
+      </if>
       <if test="delDate != null">
         del_date = #{delDate,jdbcType=TIMESTAMP},
       </if>
@@ -190,6 +204,7 @@
     update del_record
     set user_id = #{userId,jdbcType=INTEGER},
       file_name = #{fileName,jdbcType=VARCHAR},
+      save_path = #{savePath,jdbcType=VARCHAR},
       del_date = #{delDate,jdbcType=TIMESTAMP}
     where del_id = #{delId,jdbcType=INTEGER}
   </update>

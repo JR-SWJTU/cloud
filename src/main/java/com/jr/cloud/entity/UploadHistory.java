@@ -9,9 +9,19 @@ public class UploadHistory {
 
     private String fileName;
 
+    private String savePath;
+
     private Long fileSize;
 
     private Date uploadDate;
+
+    public UploadHistory(UploadRecord rec){
+        this.userId = rec.getUserId();
+        this.fileSize = rec.getFileSize();
+        this.fileName = rec.getFileName();
+        this.uploadDate = rec.getUploadDate();
+        this.savePath = rec.getSavePath();
+    }
 
     public Integer getUploadId() {
         return uploadId;
@@ -35,6 +45,14 @@ public class UploadHistory {
 
     public void setFileName(String fileName) {
         this.fileName = fileName == null ? null : fileName.trim();
+    }
+
+    public String getSavePath() {
+        return savePath;
+    }
+
+    public void setSavePath(String savePath) {
+        this.savePath = savePath == null ? null : savePath.trim();
     }
 
     public Long getFileSize() {
@@ -62,6 +80,7 @@ public class UploadHistory {
         sb.append(", uploadId=").append(uploadId);
         sb.append(", userId=").append(userId);
         sb.append(", fileName=").append(fileName);
+        sb.append(", savePath=").append(savePath);
         sb.append(", fileSize=").append(fileSize);
         sb.append(", uploadDate=").append(uploadDate);
         sb.append("]");
@@ -83,6 +102,7 @@ public class UploadHistory {
         return (this.getUploadId() == null ? other.getUploadId() == null : this.getUploadId().equals(other.getUploadId()))
             && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
             && (this.getFileName() == null ? other.getFileName() == null : this.getFileName().equals(other.getFileName()))
+            && (this.getSavePath() == null ? other.getSavePath() == null : this.getSavePath().equals(other.getSavePath()))
             && (this.getFileSize() == null ? other.getFileSize() == null : this.getFileSize().equals(other.getFileSize()))
             && (this.getUploadDate() == null ? other.getUploadDate() == null : this.getUploadDate().equals(other.getUploadDate()));
     }
@@ -94,6 +114,7 @@ public class UploadHistory {
         result = prime * result + ((getUploadId() == null) ? 0 : getUploadId().hashCode());
         result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
         result = prime * result + ((getFileName() == null) ? 0 : getFileName().hashCode());
+        result = prime * result + ((getSavePath() == null) ? 0 : getSavePath().hashCode());
         result = prime * result + ((getFileSize() == null) ? 0 : getFileSize().hashCode());
         result = prime * result + ((getUploadDate() == null) ? 0 : getUploadDate().hashCode());
         return result;

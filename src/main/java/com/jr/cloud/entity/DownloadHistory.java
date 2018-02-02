@@ -13,6 +13,8 @@ public class DownloadHistory {
 
     private Date downloadDate;
 
+    private String savePath;
+
     public Integer getDownloadId() {
         return downloadId;
     }
@@ -53,6 +55,14 @@ public class DownloadHistory {
         this.downloadDate = downloadDate;
     }
 
+    public String getSavePath() {
+        return savePath;
+    }
+
+    public void setSavePath(String savePath) {
+        this.savePath = savePath == null ? null : savePath.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -64,6 +74,7 @@ public class DownloadHistory {
         sb.append(", fileName=").append(fileName);
         sb.append(", fileSize=").append(fileSize);
         sb.append(", downloadDate=").append(downloadDate);
+        sb.append(", savePath=").append(savePath);
         sb.append("]");
         return sb.toString();
     }
@@ -84,7 +95,8 @@ public class DownloadHistory {
             && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
             && (this.getFileName() == null ? other.getFileName() == null : this.getFileName().equals(other.getFileName()))
             && (this.getFileSize() == null ? other.getFileSize() == null : this.getFileSize().equals(other.getFileSize()))
-            && (this.getDownloadDate() == null ? other.getDownloadDate() == null : this.getDownloadDate().equals(other.getDownloadDate()));
+            && (this.getDownloadDate() == null ? other.getDownloadDate() == null : this.getDownloadDate().equals(other.getDownloadDate()))
+            && (this.getSavePath() == null ? other.getSavePath() == null : this.getSavePath().equals(other.getSavePath()));
     }
 
     @Override
@@ -96,6 +108,7 @@ public class DownloadHistory {
         result = prime * result + ((getFileName() == null) ? 0 : getFileName().hashCode());
         result = prime * result + ((getFileSize() == null) ? 0 : getFileSize().hashCode());
         result = prime * result + ((getDownloadDate() == null) ? 0 : getDownloadDate().hashCode());
+        result = prime * result + ((getSavePath() == null) ? 0 : getSavePath().hashCode());
         return result;
     }
 }

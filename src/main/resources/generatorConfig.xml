@@ -61,11 +61,11 @@
 		<!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名，这里举例，只配置了一个table，你可以配置多个-->
 		<!--<table tableName="del_record" />-->
 		<!--<table tableName="admin" />-->
-		<table tableName="download_record" />
-		<table tableName="download_history" />
+		<!--<table tableName="download_record" />-->
+		<!--<table tableName="download_history" />-->
 		<!--<table tableName="expand_req" />-->
 		<table tableName="upload_record" />
-		<table tableName="upload_history" />
+		<!--<table tableName="upload_history" />-->
 		<!--<table tableName="user" />-->
 
 

@@ -295,6 +295,76 @@ public class UploadRecordExample {
             return (Criteria) this;
         }
 
+        public Criteria andSavePathIsNull() {
+            addCriterion("save_path is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSavePathIsNotNull() {
+            addCriterion("save_path is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSavePathEqualTo(String value) {
+            addCriterion("save_path =", value, "savePath");
+            return (Criteria) this;
+        }
+
+        public Criteria andSavePathNotEqualTo(String value) {
+            addCriterion("save_path <>", value, "savePath");
+            return (Criteria) this;
+        }
+
+        public Criteria andSavePathGreaterThan(String value) {
+            addCriterion("save_path >", value, "savePath");
+            return (Criteria) this;
+        }
+
+        public Criteria andSavePathGreaterThanOrEqualTo(String value) {
+            addCriterion("save_path >=", value, "savePath");
+            return (Criteria) this;
+        }
+
+        public Criteria andSavePathLessThan(String value) {
+            addCriterion("save_path <", value, "savePath");
+            return (Criteria) this;
+        }
+
+        public Criteria andSavePathLessThanOrEqualTo(String value) {
+            addCriterion("save_path <=", value, "savePath");
+            return (Criteria) this;
+        }
+
+        public Criteria andSavePathLike(String value) {
+            addCriterion("save_path like", value, "savePath");
+            return (Criteria) this;
+        }
+
+        public Criteria andSavePathNotLike(String value) {
+            addCriterion("save_path not like", value, "savePath");
+            return (Criteria) this;
+        }
+
+        public Criteria andSavePathIn(List<String> values) {
+            addCriterion("save_path in", values, "savePath");
+            return (Criteria) this;
+        }
+
+        public Criteria andSavePathNotIn(List<String> values) {
+            addCriterion("save_path not in", values, "savePath");
+            return (Criteria) this;
+        }
+
+        public Criteria andSavePathBetween(String value1, String value2) {
+            addCriterion("save_path between", value1, value2, "savePath");
+            return (Criteria) this;
+        }
+
+        public Criteria andSavePathNotBetween(String value1, String value2) {
+            addCriterion("save_path not between", value1, value2, "savePath");
+            return (Criteria) this;
+        }
+
         public Criteria andFileSizeIsNull() {
             addCriterion("file_size is null");
             return (Criteria) this;
@@ -472,6 +542,66 @@ public class UploadRecordExample {
 
         public Criteria andUploadedSliceNumNotBetween(Integer value1, Integer value2) {
             addCriterion("uploaded_slice_num not between", value1, value2, "uploadedSliceNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andUploadedSizeIsNull() {
+            addCriterion("uploaded_size is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUploadedSizeIsNotNull() {
+            addCriterion("uploaded_size is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUploadedSizeEqualTo(Long value) {
+            addCriterion("uploaded_size =", value, "uploadedSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andUploadedSizeNotEqualTo(Long value) {
+            addCriterion("uploaded_size <>", value, "uploadedSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andUploadedSizeGreaterThan(Long value) {
+            addCriterion("uploaded_size >", value, "uploadedSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andUploadedSizeGreaterThanOrEqualTo(Long value) {
+            addCriterion("uploaded_size >=", value, "uploadedSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andUploadedSizeLessThan(Long value) {
+            addCriterion("uploaded_size <", value, "uploadedSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andUploadedSizeLessThanOrEqualTo(Long value) {
+            addCriterion("uploaded_size <=", value, "uploadedSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andUploadedSizeIn(List<Long> values) {
+            addCriterion("uploaded_size in", values, "uploadedSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andUploadedSizeNotIn(List<Long> values) {
+            addCriterion("uploaded_size not in", values, "uploadedSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andUploadedSizeBetween(Long value1, Long value2) {
+            addCriterion("uploaded_size between", value1, value2, "uploadedSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andUploadedSizeNotBetween(Long value1, Long value2) {
+            addCriterion("uploaded_size not between", value1, value2, "uploadedSize");
             return (Criteria) this;
         }
     }

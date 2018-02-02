@@ -295,6 +295,76 @@ public class DelRecordExample {
             return (Criteria) this;
         }
 
+        public Criteria andSavePathIsNull() {
+            addCriterion("save_path is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSavePathIsNotNull() {
+            addCriterion("save_path is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSavePathEqualTo(String value) {
+            addCriterion("save_path =", value, "savePath");
+            return (Criteria) this;
+        }
+
+        public Criteria andSavePathNotEqualTo(String value) {
+            addCriterion("save_path <>", value, "savePath");
+            return (Criteria) this;
+        }
+
+        public Criteria andSavePathGreaterThan(String value) {
+            addCriterion("save_path >", value, "savePath");
+            return (Criteria) this;
+        }
+
+        public Criteria andSavePathGreaterThanOrEqualTo(String value) {
+            addCriterion("save_path >=", value, "savePath");
+            return (Criteria) this;
+        }
+
+        public Criteria andSavePathLessThan(String value) {
+            addCriterion("save_path <", value, "savePath");
+            return (Criteria) this;
+        }
+
+        public Criteria andSavePathLessThanOrEqualTo(String value) {
+            addCriterion("save_path <=", value, "savePath");
+            return (Criteria) this;
+        }
+
+        public Criteria andSavePathLike(String value) {
+            addCriterion("save_path like", value, "savePath");
+            return (Criteria) this;
+        }
+
+        public Criteria andSavePathNotLike(String value) {
+            addCriterion("save_path not like", value, "savePath");
+            return (Criteria) this;
+        }
+
+        public Criteria andSavePathIn(List<String> values) {
+            addCriterion("save_path in", values, "savePath");
+            return (Criteria) this;
+        }
+
+        public Criteria andSavePathNotIn(List<String> values) {
+            addCriterion("save_path not in", values, "savePath");
+            return (Criteria) this;
+        }
+
+        public Criteria andSavePathBetween(String value1, String value2) {
+            addCriterion("save_path between", value1, value2, "savePath");
+            return (Criteria) this;
+        }
+
+        public Criteria andSavePathNotBetween(String value1, String value2) {
+            addCriterion("save_path not between", value1, value2, "savePath");
+            return (Criteria) this;
+        }
+
         public Criteria andDelDateIsNull() {
             addCriterion("del_date is null");
             return (Criteria) this;

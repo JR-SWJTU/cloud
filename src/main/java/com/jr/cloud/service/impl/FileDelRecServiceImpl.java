@@ -7,9 +7,11 @@ import com.jr.cloud.entity.DelRecordExample;
 import com.jr.cloud.mapper.DelRecordMapper;
 import com.jr.cloud.mapper.DelRecordMapperCustom;
 import com.jr.cloud.service.IFileDelRecService;
+import com.jr.cloud.service.IFileService;
 import com.jr.cloud.util.PageResult;
 import com.jr.cloud.web.exception.base.CustomException;
 import net.sf.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -25,6 +27,8 @@ public class FileDelRecServiceImpl implements IFileDelRecService {
     private DelRecordMapper delRecordMapper;
     @Resource
     private DelRecordMapperCustom delRecordMapperCustom;
+    @Autowired
+    private IFileService fileService;
 
     /**
      * 添加一条文件删除记录记录到数据库
@@ -41,7 +45,12 @@ public class FileDelRecServiceImpl implements IFileDelRecService {
      * @param ids 要删除的文件删除记录的id的数组
      */
     public void deleteDelRec(List ids) throws Exception {
+        DelRecord rec = null;
         for(int i = 0 ;  i < ids.size(); i++){
+            rec = delRecordMapper.selectByPrimaryKey((Integer) ids.get(i));
+            //删除回收站中的文件
+            fileService.deleteDir(  rec.getSavePath() );
+            //删除文件删除记录
             delRecordMapper.deleteByPrimaryKey( (Integer) ids.get(i));
         }
     }

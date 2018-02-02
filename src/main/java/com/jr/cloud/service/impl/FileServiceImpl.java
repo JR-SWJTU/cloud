@@ -37,6 +37,11 @@ public class FileServiceImpl implements IFileService {
             e.printStackTrace();
         }
 
+        //文件夹不存在，返回空
+        if( !fs.exists(new Path(fullUri))){
+            return null;
+        }
+
         FileStatus[] fileStatuses = fs.listStatus(new Path(fullUri));
         List<FileInfo> fileInfos = new ArrayList<FileInfo>(fileStatuses.length);
         for(int i = 0; i < fileStatuses.length; i++){
@@ -98,7 +103,7 @@ public class FileServiceImpl implements IFileService {
         FileSystem fs = FileSystemUtil.getFileSystem(FileSystemUtil.uri);
         Path srcPath = new Path(fullUri);
         Path desPath = new Path(FileSystemUtil.uri + des);
-        if( fs.exists( new Path(FileSystemUtil.uri + des + "//" + src.substring(src.lastIndexOf("/")+1)))){
+        if( fs.exists( new Path(FileSystemUtil.uri + des + "/" + src.substring(src.lastIndexOf("/")+1)))){
             throw new CustomException("目标文件夹存在同名文件");
         }
         //对于目标目录的同名文件，不覆盖

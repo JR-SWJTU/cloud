@@ -1,22 +1,15 @@
 package com.jr.cloud.util;
 
-import com.jr.cloud.entity.UploadRecord;
-import com.jr.cloud.web.exception.base.CustomException;
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IOUtils;
 import org.apache.hadoop.util.Progressable;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.net.URI;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.stream.Collectors;
-
-import static org.aspectj.weaver.tools.cache.SimpleCacheFactory.path;
 
 /**
  * Created by Administrator on 2018/1/29.
@@ -60,40 +53,37 @@ public class FileUtil {
 
     /**
      * 判断分片的文件是否已经存在
-     * @param fileName  文件名称
-     * @param chunkNum  分片序号
-     * @param userId    用户id
+     * @param savePath 分片文件存储路径
      * @return
      * @throws Exception
      */
-    public static boolean fileExists(String fileName, int chunkNum, int userId) throws Exception {
-        String fullUri = FileSystemUtil.uri + String.valueOf(userId) + "//" + fileName +  "//" + String.valueOf(chunkNum);
+    public static boolean fileExists(String savePath, int chunkNum, long chunkSize) throws Exception {
+        String fullUri = FileSystemUtil.uri +savePath +  "//" + String.valueOf(chunkNum);
         FileSystem fs = FileSystemUtil.getFileSystem(FileSystemUtil.uri);
         Path path = new Path(fullUri);
-        if( fs.exists( path)){
-            return true;
-        }else {
-            return false;
+        //如果分块文件存在，且大小等于块大小，则证明该分片文件已经存在，否则不存在
+        if( fs.exists( path) ){
+            FileStatus[] fileStatuses = fs.listStatus(path);
+            if(fileStatuses[0].getLen() == chunkSize){
+                return true;
+            }
         }
+        return false;
+
     }
 
     /**
      * 存储分片文件
-     * @param fileName  文件名称
+     * @param savePath 分片文件存储路径
      * @param chunkNum  分片序号
-     * @param userId    用户id
      * @param file      分片文件
      * @throws Exception
      */
-    public static void saveFile( String fileName, int chunkNum, int userId, MultipartFile file) throws Exception {
+    public static void saveFile( String savePath, int chunkNum, MultipartFile file) throws Exception {
 
-        String fullUri = FileSystemUtil.uri + String.valueOf(userId) + "//" + fileName.substring( 0, fileName.lastIndexOf("."));
+        String fullUri = FileSystemUtil.uri + savePath;
         FileSystem fs = FileSystemUtil.getFileSystem(FileSystemUtil.uri);
         Path path = new Path(fullUri);
-        //判断分片存储的临时文件夹是否存在，不存在则创建
-        if( !fs.exists( path)){
-            fs.mkdirs( path);
-        }
 
         //存储分片文件
         //初始化输入流
@@ -118,18 +108,18 @@ public class FileUtil {
 
     /**
      * 合并分片文件
+     * @param savePath 分片文件存储路径
      * @param fileName 文件名称
-     * @param userId  用户id
      * @throws Exception
      */
-    private static void mergeFile( String fileName, int userId) throws Exception{
+    public static void mergeFile( String savePath, String fileName) throws Exception{
 
         //源分片文件所在的目录
-        String fullUri = FileSystemUtil.uri + String.valueOf(userId) + "//" + fileName.substring( 0, fileName.lastIndexOf("."));
+        String fullUri = FileSystemUtil.uri + savePath;
         FileSystem fs = FileSystemUtil.getFileSystem(FileSystemUtil.uri);
         Path path = new Path(fullUri);
         //文件合并，并删除分片文件所在的文件夹
-        org.apache.hadoop.fs.FileUtil.copyMerge(fs, path, fs, new Path(FileSystemUtil.uri + String.valueOf(userId) + "//" + fileName), true, new Configuration(), null);
+        org.apache.hadoop.fs.FileUtil.copyMerge(fs, path, fs, new Path(FileSystemUtil.uri + savePath + fileName.substring( fileName.lastIndexOf("."))), true, new Configuration(), null);
     }
 
 

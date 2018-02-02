@@ -3,6 +3,7 @@ package testFile;
 import com.jr.cloud.dto.FileInfo;
 import com.jr.cloud.service.IFileService;
 import com.jr.cloud.service.impl.FileServiceImpl;
+import com.jr.cloud.util.FileSystemUtil;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
@@ -18,6 +19,7 @@ import java.util.Date;
 import java.util.List;
 
 import static java.lang.System.in;
+import static org.aspectj.weaver.tools.cache.SimpleCacheFactory.path;
 
 
 /**
@@ -28,52 +30,24 @@ public class TestAccident {
     @Test
     public void test() {
 //        ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:/spring/applicationContext-*.xml");
-        Date date= new Date(System.currentTimeMillis());
-        System.out.print(new SimpleDateFormat("yyyy-MM-dd HH:mm").format(date));
-        System.out.print(String.format("%.2f",3.244));
-        IFileService fileService = new FileServiceImpl();
-        try{
-
-            List<FileInfo> lsit = fileService.listFile("input");
-            System.out.print(lsit.get(0).getFileName());
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-//        AccidentMapperCustom accidentMapperCustom = ctx.getBean(AccidentMapperCustom.class);
-
-//        AccidentQueryCondition condition = new AccidentQueryCondition();
-//        condition.setAreaName("金牛区");
-//        condition.setRoadLevel("高速公路");
-//        condition.setWeather("晴朗");
-//        condition.setWorkPlaceRel("否");
-//        condition.setRoadType("非交叉口");
-//        condition.setTeamName("大队A");
-//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-//        try {
-//            condition.setStartTime(format.parse("2017-09-09") );
-//            condition.setEndTime(format.parse("2017-12-30"));
-//        } catch (ParseException e) {
+//        Date date= new Date(System.currentTimeMillis());
+//        System.out.print(new SimpleDateFormat("yyyy-MM-dd HH:mm").format(date));
+//        System.out.print(String.format("%.2f",3.244));
+//        IFileService fileService = new FileServiceImpl();
+//        try{
+//
+//            List<FileInfo> lsit = fileService.listFile("input");
+//            System.out.print(lsit.get(0).getFileName());
+//        }catch (Exception e){
 //            e.printStackTrace();
 //        }
-//        condition.setCarCollisionType("翻车");
-//        condition.setTroEscape("否");
-//        condition.setAreaName("金牛区");
-//        condition.setIsWorkDay(1);
-//        condition.setCarType("小客车");
-//
-//        System.out.println(new Gson().toJson(condition));
-//        System.out.println(new Gson().toJson(accidentMapperCustom.multiConditionQueryAccidentForSGS(condition)));
 
-//        String name[] = {"一大队","二大队","二大队"};
-//        JSONObject jsonObject = new JSONObject();
-//        jsonObject.put("teamName",name);
-//        System.out.println(jsonObject.toString());
+        String path = "/41/51/aaa";
+        path = path.substring( path.indexOf("/")+1);
+        System.out.println( path);
+        path = path.substring( path.indexOf("/")+1);
+        System.out.println( path);
 
-//        Map<String, Integer> map = new HashMap<String, Integer>();
-//        map.put("轻伤",5);
-//        System.out.println( new Gson().toJson(map));
-//
-//        deleteDir(new File("E:\\roadCheck\\")) ;
 
 
 
@@ -135,18 +109,13 @@ public class TestAccident {
 
     }
 
-    private  boolean deleteDir(File dir) {
-        if (dir.isDirectory()) {
-            String[] children = dir.list();
-            //递归删除目录中的子目录下
-            for (int i=0; i<children.length; i++) {
-                boolean success = deleteDir(new File(dir, children[i]));
-                if (!success) {
-                    return false;
-                }
-            }
-        }
-        // 目录此时为空，可以删除
-        return dir.delete();
+    @Test
+    public   void deleteDir() throws IOException {
+        String fullUri = FileSystemUtil.uri + "1";
+        FileSystem fs = FileSystemUtil.getFileSystem(FileSystemUtil.uri);
+        Path path1 = new Path(fullUri);
+        fs.delete(path1,true);
+
     }
+
 }
